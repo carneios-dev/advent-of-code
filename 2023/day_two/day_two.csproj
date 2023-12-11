@@ -7,4 +7,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <Target Name="PostBuild" AfterTargets="PostBuildEvent">
+    <Exec Command="echo Copying input.txt to output dir...&#xD;&#xA;copy input.txt $(OutputPath)" />
+  </Target>
+
 </Project>
