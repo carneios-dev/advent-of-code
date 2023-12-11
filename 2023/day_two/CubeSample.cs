@@ -4,14 +4,6 @@
 
         internal CubeSample() { }
 
-        internal CubeSample(ColorSample.Color color, int count) {
-            AddSample(color, count);
-        }
-
-        internal CubeSample(List<KeyValuePair<ColorSample.Color, int>> samples) {
-            AddSamples(samples);
-        }
-
         internal void AddSample(ColorSample.Color color, int count) {
             ColorSamples.Add(new ColorSample(color, count));
         }

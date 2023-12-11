@@ -3,8 +3,6 @@
         internal List<CubeSample> Samples { set; get; }
         internal int ID { private set; get; }
 
-        internal Game() { }
-
         internal Game(int id) {
             ID = id;
         }
