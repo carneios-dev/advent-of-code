@@ -8,11 +8,6 @@
             Samples = new List<CubeSample>();
         }
 
-        internal Game(int id, List<CubeSample> samples) {
-            ID = id;
-            Samples = samples;
-        }
-
         internal bool IsGamePossible(int redMax, int greenMax, int blueMax) {
             if (GetHighestNumberRedSample() <= redMax && GetHighestNumberGreenSample() <= greenMax && GetHighestNumberBlueSample() <= blueMax) return true;
 

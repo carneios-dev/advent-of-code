@@ -8,12 +8,6 @@
             ColorSamples.Add(sample);
         }
 
-        internal void AddSamples(List<KeyValuePair<ColorSample.Color, int>> samples) {
-            foreach (var item in samples) {
-                ColorSamples.Add(new ColorSample(item.Key, item.Value));
-            }
-        }
-
         internal sealed class ColorSample {
             public enum Color {
                 BLUE,
@@ -24,9 +18,6 @@
             internal KeyValuePair<Color, int> Sample { get; set; }
 
             internal ColorSample() { }
-            internal ColorSample(Color color, int count) {
-                Sample = new KeyValuePair<Color, int>(color, count);
-            }
         }
     }
 }

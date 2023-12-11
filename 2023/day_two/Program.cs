@@ -1,10 +1,11 @@
-﻿using day_two;
-using System.Collections.Concurrent;
+﻿using System.Collections.Concurrent;
+
+using day_two;
 
 static List<Game> ReadAndParseInputFile() {
     var lines = File.ReadLines("input.txt");
     var options = new ParallelOptions { MaxDegreeOfParallelism = Environment.ProcessorCount };
-    ConcurrentBag<Game> games = new ConcurrentBag<Game>();
+    ConcurrentBag<Game> games = [];
 
     // E.g., "Game 1: 2 red, 2 green; 1 red, 1 green, 2 blue; 3 blue, 3 red, 3 green; 1 blue, 3 green, 7 red; 5 red, 3 green, 1 blue"
     Parallel.ForEach(lines, options, line => {
@@ -50,7 +51,7 @@ static List<Game> ReadAndParseInputFile() {
         games.Add(newGame);
     });
 
-    return games.ToList();
+    return [.. games];
 }
 
 // Entrypoint
