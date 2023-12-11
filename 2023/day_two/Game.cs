@@ -5,6 +5,7 @@
 
         internal Game(int id) {
             ID = id;
+            Samples = new List<CubeSample>();
         }
 
         internal Game(int id, List<CubeSample> samples) {

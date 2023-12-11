@@ -15,29 +15,35 @@ static List<Game> ReadAndParseInputFile() {
         // E.g., "1 red, 1 green, 2 blue"
         foreach (var hand in sampleHands) {
             var cubesInHand = hand.Split(", ");
+            var newCubeSample = new CubeSample();
 
             // E.g., "1 red"
             foreach (var cubeSample in cubesInHand) {
                 var cubeSampleSplit = cubeSample.Split(' ');
-                var newCubeSample = new CubeSample();
+                var newColorSample = new CubeSample.ColorSample();
 
                 switch (cubeSampleSplit[1].ToLower()) {
                     case "red":
-                        newCubeSample.AddSample(CubeSample.ColorSample.Color.RED, int.Parse(cubeSampleSplit[0]));
+                        newColorSample.Sample = new KeyValuePair<CubeSample.ColorSample.Color, int>(CubeSample.ColorSample.Color.RED, int.Parse(cubeSampleSplit[0]));
                         break;
                     case "green":
-                        newCubeSample.AddSample(CubeSample.ColorSample.Color.GREEN, int.Parse(cubeSampleSplit[0]));
+                        newColorSample.Sample = new KeyValuePair<CubeSample.ColorSample.Color, int>(CubeSample.ColorSample.Color.GREEN, int.Parse(cubeSampleSplit[0]));
                         break;
                     case "blue":
-                        newCubeSample.AddSample(CubeSample.ColorSample.Color.BLUE, int.Parse(cubeSampleSplit[0]));
+                        newColorSample.Sample = new KeyValuePair<CubeSample.ColorSample.Color, int>(CubeSample.ColorSample.Color.BLUE, int.Parse(cubeSampleSplit[0]));
                         break;
                     default:
                         Console.WriteLine("Incorrect color found.");
+
+                        // Empty the result set and return.
+                        games.Clear();
                         return;
                 }
 
-                newGame.Samples.Add(newCubeSample);
+                newCubeSample.AddSample(newColorSample);
             }
+
+            newGame.Samples.Add(newCubeSample);
         }
 
         games.Add(newGame);
@@ -48,11 +54,16 @@ static List<Game> ReadAndParseInputFile() {
 
 // Entrypoint
 
+var games = ReadAndParseInputFile();
+
+if (games.Count == 0) {
+    return;
+}
+
 const int redMax = 12;
 const int greenMax = 13;
 const int blueMax = 14;
 
-var games = ReadAndParseInputFile();
 var gameIDSum = 0;
 
 foreach (var game in games) {
